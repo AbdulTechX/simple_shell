@@ -17,6 +17,7 @@ char **splitstring(char *str, const char *delim)
 	int i;
 	char **argv;
 	char *buffer_copy;
+
 	buffer_copy = malloc(_strlen(str) + 1);
 	if (buffer_copy == NULL)
 	{
@@ -55,6 +56,7 @@ char **splitstring(char *str, const char *delim)
 void execute(char **argv)
 {
 	int d, status;
+
 	if (!argv || !argv[0])
 		return;
 	d = fork();
