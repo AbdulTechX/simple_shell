@@ -1,29 +1,55 @@
 #include "shell.h"
 
+
 /**
- * _putchar - writes the character c to stdout
- * @c: The character to print
- *
- * Return: On success 1.
- * On error, -1 is returned, and errno is set appropriately.
+ * _strdup - returns a pointer to a newly allocated space in memory, which
+ * contains a copy of the string given as a parameter
+ * @str: pointer to a string
+ * Return: pointer to a string
  */
-int _putchar(char c)
+char *_strdup(char *str)
 {
-	return (write(1, &c, 1));
+	int index, len;
+	char *new_ptr;
+}
+
+	if (!str)
+	{
+		return (NULL);
+	}
+
+	for (len = 0; str[len] != '\0';)
+	{
+		len++;
+	}
+
+	new_ptr = malloc(sizeof(char) * len + 1);
+	if (!new_ptr)
+	{
+		return (NULL);
+	}
+
+	for (index = 0; index < len; index++)
+	{
+		new_ptr[index] = str[index];
+	}
+
+	new_ptr[len] = str[len];
+	return (new_ptr);
 }
 
 /**
- * _puts - prints a string
- * @str: pointer to string
+ * _strlen - it gives the length of a string
+ * @str: pointer to the string
+ * Return: the length of string
  */
-
-void _puts(char *str)
+int _strlen(char *str)
 {
-	int i = 0;
+	int index = 0;
 
-	while (str[i])
+	while (*(str + index) != '\0')
 	{
-		_putchar(str[i]);
-		i++;
+		index++;
 	}
+	return (index);
 }
