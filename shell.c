@@ -52,7 +52,7 @@ void _isatty(void)
  */
 int main(int argc, char **argv)
 {
-	char *buffer = NULL;
+	char *buffer = NULL, **prompt;
 	size_t n = 0;
 	ssize_t read_char;
 
@@ -68,6 +68,8 @@ int main(int argc, char **argv)
 		read_char = getline(&buffer, &n, stdin);
 		/* check if the getline function fail to reach the EOF or user use Crtl C*/
 		_EOF(read_char, buffer);
+		prompt = splitstring(buffer, "\n");
+		execute(prompt);
 	}
 	free(buffer);
 

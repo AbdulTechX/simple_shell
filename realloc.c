@@ -3,8 +3,8 @@
 /**
  * _realloc - Reallocates memory block
  * @ptr: previous pointer
- * @old_size: old size of previous pointer
- * @new_size: new size for our pointer
+ * @size_t: old size of previous pointer
+ * @n_size: new size for our pointer
  * Return: New resized Pointer
  */
 
