@@ -1,21 +1,8 @@
 #include "shell.h"
 
-void sig_handler(int sig);
 void _EOF(int read_char, char *buffer);
 void _isatty(void);
 int main(int arc, char **argv);
-
-/**
- * sig_handler - check if Ctrl C is pressed
- * @sig: int.
- */
-void sig_handler(int sig)
-{
-	if (sig == SIGINT)
-	{
-		_puts("\n#simple_shell$ ");
-	}
-}
 
 /**
  * _EOF - handles the End of File.
