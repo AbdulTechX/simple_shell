@@ -21,7 +21,7 @@ char **splitstring(char *str, const char *delim)
 	buffer_copy = malloc(_strlen(str) + 1);
 	if (buffer_copy == NULL)
 	{
-		perror("Error:");
+		perror(_getenv("_"));
 		return (NULL);
 	}
 	i = 0;
@@ -56,19 +56,20 @@ char **splitstring(char *str, const char *delim)
 */
 void execute(char **argv)
 {
-	int d, status;
+	int status;
+	pid_t child_pid;
 
 	if (!argv || !argv[0])
 		return;
-	d = fork();
-	if (d == -1)
+	child_pid = fork();
+	if (child_pid == -1)
 	{
-		perror("Error:");
+		perror(_getenv("_"));
 	}
-	if (d == 0)
+	if (child_pid == 0)
 	{
 		execve(argv[0], argv, NULL);
-			perror("./hsh");
+			perror(argv[0]);
 		exit(EXIT_FAILURE);
 	}
 	wait(&status);

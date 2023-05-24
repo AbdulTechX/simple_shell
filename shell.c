@@ -72,6 +72,7 @@ int main(int argc, char **argv)
 		execute(prompt);
 	}
 	free(buffer);
+	free(prompt);
 
 	return (0);
 }

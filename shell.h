@@ -11,6 +11,7 @@
 #include <signal.h>
 #include <errno.h>
 
+
 int _putchar(char c);
 void _puts(char *str);
 int _strlen(char *s);
@@ -24,5 +25,8 @@ void sig_handler(int sig);
 void _EOF(int read_char, char *buffer);
 void _isatty(void);
 int main(int arc, char **argv);
+
+extern char **environ;
+char *_getenv(const char *name);
 
 #endif
