@@ -40,7 +40,8 @@ char **splitstring(char *str, const char *delim)
 	while (token_store)
 	{
 		token_store = strtok(NULL, delim);
-		argv = _realloc(argv, (sizeof(char *) * (count_tokens - 1)), (sizeof(char *) * count_tokens));
+		argv = _realloc(argv, (sizeof(char *) * (count_tokens - 1)),
+				(sizeof(char *) * count_tokens));
 		argv[i] = _strdup(token_store);
 		i++;
 		count_tokens++;
