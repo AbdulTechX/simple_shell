@@ -1,8 +1,5 @@
 #include "shell.h"
 
-void _EOF(int read_char, char *buffer);
-void _isatty(void);
-int main(int arc, char **argv);
 
 /**
  * _EOF - handles the End of File.
@@ -37,14 +34,13 @@ void _isatty(void)
  * @argv: array of argument variable.
  * Return: Always 0 on success.
  */
-int main(int argc, char **argv)
+int main(void)
 {
-	char *buffer = NULL, **prompt;
+	char *buffer = NULL, *ret, *path_name, **prompt;
 	size_t n = 0;
 	ssize_t read_char;
-
-	(void)argc;
-	(void)argv;
+	list_t *head = '\0';
+	void (*arc)(char**);
 
 	/* create an indefinte loop */
 
@@ -56,10 +52,34 @@ int main(int argc, char **argv)
 		/* check if the getline function fail to reach the EOF or user use Crtl C*/
 		_EOF(read_char, buffer);
 		prompt = splitstring(buffer, "\n");
-		execute(prompt);
+		if (!prompt || !prompt[0])
+			execute(prompt);
+
+		else
+		{
+			ret = _getenv("PATH");
+			head = path_fill(ret);
+			path_name = _which(prompt[0], head);
+			arc = check_builtin(prompt);
+			if (arc)
+			{
+				free(buffer);
+				arc(prompt);
+			}
+			else if (!path_name)
+				execute(prompt);
+			else if (path_name)
+			{
+				free(prompt[0]);
+				prompt[0] = path_name;
+				execute(prompt);
+			}
+		}
+
 	}
 	free(buffer);
-	free(prompt);
+	free_prompt(prompt);
+	free_list(head);
 
 	return (0);
 }

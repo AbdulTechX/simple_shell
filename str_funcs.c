@@ -45,3 +45,40 @@ char *_strdup(char *str)
 	}
 	return (str2);
 }
+
+/**
+ * concat_all - concats 3 strings in a newly allocated memory
+ * @str1: first string
+ * @str2: second string
+ * @str3: Third string
+ * Return: pointer to the new string
+ */
+char *concat_all(char *str1, char *str2, char *str3)
+{
+	char *ret;
+	int l1, l2, l3, i, k;
+
+	l1 = _strlen(str1);
+	l2 = _strlen(str2);
+	l3 = _strlen(str3);
+
+	ret = malloc(l1 + l2 + l3 + 1);
+	if (!ret)
+		return (NULL);
+
+	for (i = 0; str1[i]; i++)
+		ret[i] = str1[i];
+	k = i;
+
+	for (i = 0; str2[i]; i++)
+		ret[k + i] = str2[i];
+	k = k + i;
+
+	for (i = 0; str3[i]; i++)
+		ret[k + i] = str3[i];
+	k = k + i;
+
+	ret[k] = '\0';
+
+	return (ret);
+}
