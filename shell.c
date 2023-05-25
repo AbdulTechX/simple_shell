@@ -36,11 +36,12 @@ void _isatty(void)
  */
 int main(void)
 {
+
 	char *buffer = NULL, *ret, *path_name, **prompt;
 	size_t n = 0;
 	ssize_t read_char;
 	list_t *head = '\0';
-	void (*arc)(char**);
+	void (*arc)(char **);
 
 	/* create an indefinte loop */
 
@@ -49,7 +50,7 @@ int main(void)
 	{
 		_isatty();
 		read_char = getline(&buffer, &n, stdin);
-		/* check if the getline function fail to reach the EOF or user use Crtl C*/
+		/* check if the getline function fail */
 		_EOF(read_char, buffer);
 		prompt = splitstring(buffer, "\n");
 		if (!prompt || !prompt[0])
@@ -80,6 +81,5 @@ int main(void)
 	free(buffer);
 	free_prompt(prompt);
 	free_list(head);
-
 	return (0);
 }
