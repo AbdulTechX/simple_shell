@@ -19,7 +19,7 @@ int shell_exit(input_t *input)
 		if (exitcheck == -1)
 		{
 			input->status = 2;
-			print_error(input, "illegal number: ");
+			create_error(input, "illegal number: ");
 			_error_puts(input->argv[1]);
 			_error_putchar('\n');
 			return (1);
@@ -44,12 +44,12 @@ int shell_cd(input_t *input)
 
 	str = getcwd(buffer, 1024);
 	if (!str)
-		_puts("TODO: >>getcwd failure emsg herre<<\n");
+		_puts("TODO: >>getcwd failure emsg here<<\n");
 	if (!input->argv[1])
 	{
 		dir = _getenv(input, "HOME=");
 		if (!dir)
-			chdir_ret = /* TODO: ehat shoulfd this be */
+			chdir_ret = /* TODO: what should this be? */
 				chdir((dir = _getenv(input, "PWD=")) ? dir : "/");
 		else
 			chdir_ret = chdir(dir);
@@ -65,6 +65,13 @@ int shell_cd(input_t *input)
 		_puts(_getenv(input, "OLDPWD=")), _putchar('\n');
 		chdir_ret = /* TODO: what should this be? */
 			chdir((dir = _getenv(input, "OLDPWD=")) ? dir : "/");
+	}
+	else
+		chdir_ret = chdir(input->argv[1]);
+	if (chdir_ret == -1)
+	{
+		create_error(input, "can't cd to ");
+		_error_puts(input->argv[1]), _error_putchar('\n');
 	}
 	else
 	{

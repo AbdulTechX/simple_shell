@@ -1,18 +1,16 @@
 #ifndef SEHLL_H
 #define SHELL_H
 
-#include <stdlib.h>
 #include <stdio.h>
 #include <stdlib.h>
 #include <unistd.h>
-#include <sys/wait.h>
+#include <string.h>
 #include <sys/types.h>
-#include <string.h>
-#include <stddef.h>
-#include <signal.h>
-#include <errno.h>
-#include <string.h>
+#include <sys/wait.h>
 #include <sys/stat.h>
+#include <limits.h>
+#include <fcntl.h>
+#include <errno.h>
 
 /* for read/write buffers */
 #define READ_BUF_SIZE 1024
@@ -170,10 +168,10 @@ int _atoi(char *str);
 
 /* toem_errors1.c */
 int _erratoi(char *);
-void print_error(input_t *, char *);
+void create_error(input_t *, char *);
 int print_d(int, int);
 char *convert_number(long int, int, int);
-void remove_comments(char *);
+void rm_comments(char *);
 
 /* toem_builtin.c */
 int shell_exit(input_t *input);
